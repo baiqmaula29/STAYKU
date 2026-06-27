@@ -10,92 +10,107 @@ if(!isset($_SESSION['user_id'])){
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Dashboard User</title>
 
-<link rel="stylesheet"
-href="../assets/user.css">
+<link rel="stylesheet" href="../assets/user.css">
 
 </head>
 <body>
 
 <div class="navbar">
 
-<div class="logo">
-HOSTELKU
+    <div class="logo">
+        🏨 HostelKu
+    </div>
+
+    <ul class="nav-menu">
+
+        <li>
+            <a href="dashboard.php">🏠 Home</a>
+        </li>
+
+        <li>
+            <a href="kamar.php">🛏️ Kamar</a>
+        </li>
+
+        <li>
+            <a href="riwayat.php">📋 Riwayat</a>
+        </li>
+
+        <li>
+            <a href="profile.php">👤 Profil</a>
+        </li>
+
+        <li>
+            <a href="../logout.php" class="logout">
+                🚪 Logout
+            </a>
+        </li>
+
+    </ul>
+
 </div>
-
-<div class="menu">
-
-<a href="dashboard.php">Home</a>
-
-<a href="kamar.php">Kamar</a>
-
-<a href="riwayat.php">Riwayat</a>
-
-<a href="profile.php">Profil</a>
-
-<a href="../logout.php">Logout</a>
-
-</div>
-
-</div>
+<!-- HERO -->
 
 <div class="hero">
 
-<div class="hero-text">
+    <h1>
+        Selamat Datang,
+        <?= $_SESSION['name']; ?> 👋
+    </h1>
 
-<h1>
-Selamat Datang,
-<?= $_SESSION['name']; ?> 👋
-</h1>
+    <p>
+        Temukan kamar hostel terbaik dengan harga terjangkau.
+    </p>
 
-<p>
-Cari dan booking kamar hostel favoritmu
-</p>
+    <br>
 
-<a href="kamar.php" class="btn">
-Lihat Kamar
-</a>
-
-</div>
-
-<div class="hero-image">
-
-<img
-src="https://images.unsplash.com/photo-1566073771259-6a8506099945">
+    <a href="kamar.php" class="btn">
+        Booking Sekarang
+    </a>
 
 </div>
 
-</div>
+<!-- FITUR -->
 
 <div class="container">
 
-<h2 class="section-title">
-Kamar Tersedia
-</h2>
+    <div class="feature">
 
-<div class="feature">
+        <div class="feature-box">
 
-<div class="feature-box">
-🏨
-<h3>Harga Terbaik</h3>
-<p>Dapatkan harga terbaik setiap hari</p>
-</div>
+            <h3>🏨 Kamar Nyaman</h3>
 
-<div class="feature-box">
-🛡️
-<h3>Aman & Nyaman</h3>
-<p>Kamar bersih dan fasilitas lengkap</p>
-</div>
+            <p>
+                Kamar bersih dan nyaman untuk istirahat.
+            </p>
 
-<div class="feature-box">
-💳
-<h3>Pembayaran Mudah</h3>
-<p>Transfer atau E-Wallet</p>
-</div>
+        </div>
 
-</div>
+        <div class="feature-box">
+
+            <h3>💰 Harga Terjangkau</h3>
+
+            <p>
+                Harga sesuai kantong mahasiswa dan traveler.
+            </p>
+
+        </div>
+
+        <div class="feature-box">
+
+            <h3>🔒 Aman</h3>
+
+            <p>
+                Data booking tersimpan dengan aman.
+            </p>
+
+        </div>
+
+    </div>
 
 </div>
 

@@ -13,10 +13,17 @@ CREATE TABLE rooms (
     id INT AUTO_INCREMENT PRIMARY KEY,
     room_name VARCHAR(100) NOT NULL,
     room_number VARCHAR(20) NOT NULL,
-    price DECIMAL(12,2) NOT NULL,
+
+    daily_price DECIMAL(12,2) NOT NULL,
+    weekly_price DECIMAL(12,2) NOT NULL,
+
     photo VARCHAR(255),
+
+    description TEXT,
+
     status ENUM('available','occupied')
     DEFAULT 'available',
+
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE bookings (
@@ -25,6 +32,10 @@ CREATE TABLE bookings (
     user_id INT NOT NULL,
     room_id INT NOT NULL,
 
+    rent_type ENUM('harian','mingguan') NOT NULL,
+
+    duration INT NOT NULL,
+
     check_in DATE,
     check_out DATE,
 
@@ -32,17 +43,18 @@ CREATE TABLE bookings (
 
     status ENUM(
         'pending',
-        'approved',
+        'Menunggu Verifikasi',
+        'Lunas',
         'cancelled'
     ) DEFAULT 'pending',
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (user_id)
+    FOREIGN KEY(user_id)
     REFERENCES users(id)
     ON DELETE CASCADE,
 
-    FOREIGN KEY (room_id)
+    FOREIGN KEY(room_id)
     REFERENCES rooms(id)
     ON DELETE CASCADE
 );

@@ -6,7 +6,9 @@ require '../config.php';
 $query = $pdo->query("
 SELECT
 payments.*,
-users.fullname
+users.fullname,
+rooms.room_name,
+bookings.id AS booking_id
 
 FROM payments
 
@@ -16,6 +18,9 @@ ON payments.booking_id = bookings.id
 JOIN users
 ON bookings.user_id = users.id
 
+JOIN rooms
+ON bookings.room_id = rooms.id
+
 ORDER BY payments.id DESC
 ");
 
@@ -24,9 +29,15 @@ ORDER BY payments.id DESC
 <!DOCTYPE html>
 <html>
 <head>
+
+<meta charset="UTF-8">
+
 <title>Data Pembayaran</title>
+
 <link rel="stylesheet" href="../assets/style.css">
+
 </head>
+
 <body>
 
 <div class="sidebar">
@@ -50,11 +61,15 @@ ORDER BY payments.id DESC
 <table class="table">
 
 <tr>
+
 <th>ID</th>
 <th>Nama User</th>
+<th>Kamar</th>
 <th>Jumlah</th>
 <th>Bukti Bayar</th>
 <th>Status</th>
+<th>Aksi</th>
+
 </tr>
 
 <?php while($row = $query->fetch()): ?>
@@ -65,23 +80,56 @@ ORDER BY payments.id DESC
 
 <td><?= $row['fullname']; ?></td>
 
+<td><?= $row['room_name']; ?></td>
+
 <td>
 Rp <?= number_format($row['amount']); ?>
 </td>
 
 <td>
 
-<?php if($row['payment_proof']) : ?>
+<?php if($row['payment_proof']){ ?>
 
 <img
 src="../assets/upload/<?= $row['payment_proof']; ?>"
-width="100">
+width="120">
 
-<?php endif; ?>
+<?php }else{ ?>
+
+Belum Upload
+
+<?php } ?>
 
 </td>
 
-<td><?= $row['status']; ?></td>
+<td>
+
+<?= $row['status']; ?>
+
+</td>
+
+<td>
+
+<b>Booking ID :</b> <?= $row['booking_id']; ?><br>
+<b>Payment ID :</b> <?= $row['id']; ?><br><br>
+
+<?php if($row['status']=="pending"){ ?>
+
+<a
+href="verifikasi.php?id=<?= $row['id']; ?>&booking=<?= $row['booking_id']; ?>"
+class="btn">
+
+Verifikasi
+
+</a>
+
+<?php }else{ ?>
+
+✔ Sudah Diverifikasi
+
+<?php } ?>
+
+</td>
 
 </tr>
 
