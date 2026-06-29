@@ -43,7 +43,8 @@ Tambah Kamar
     <th>Foto</th>
     <th>Nama</th>
     <th>Nomor</th>
-    <th>Harga</th>
+    <th>Harga Harian</th>
+    <th>Harga Mingguan</th>
     <th>Status</th>
     <th>Aksi</th>
 </tr>
@@ -53,24 +54,30 @@ Tambah Kamar
 <tr>
 
 <td>
-<img src="../assets/upload/<?= $room['photo']; ?>"
-width="80">
+<img src="../assets/upload/<?= $room['photo']; ?>" width="80">
 </td>
 
 <td><?= $room['room_name']; ?></td>
+
 <td><?= $room['room_number']; ?></td>
-<td>Rp <?= number_format($room['price']); ?></td>
-<td><?= $room['status']; ?></td>
+
+<td>
+Rp <?= number_format($room['daily_price']); ?>
+</td>
+
+<td>
+Rp <?= number_format($room['weekly_price']); ?>
+</td>
+
+<td><?= ucfirst($room['status']); ?></td>
 
 <td>
 
-<a href="edit_kamar.php?id=<?= $room['id']; ?>"
-class="btn-warning">
+<a href="edit_kamar.php?id=<?= $room['id']; ?>" class="btn-warning">
 Edit
 </a>
 
-<a href="hapus_kamar.php?id=<?= $room['id']; ?>"
-class="btn-danger"
+<a href="hapus_kamar.php?id=<?= $room['id']; ?>" class="btn-danger"
 onclick="return confirm('Hapus data?')">
 Hapus
 </a>

@@ -104,7 +104,11 @@ alt="<?= $room['room_name']; ?>">
 </p>
 
 <p class="price">
-💰 Rp <?= number_format($room['price']); ?>
+💰 Harian : Rp <?= number_format($room['daily_price']); ?>
+</p>
+
+<p class="price">
+📅 Mingguan : Rp <?= number_format($room['weekly_price']); ?>
 </p>
 
 <p>
