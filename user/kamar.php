@@ -8,16 +8,28 @@ if(!isset($_SESSION['user_id'])){
     exit;
 }
 
+// Otomatis mengubah kamar menjadi tersedia jika masa sewa sudah habis
+$pdo->query("
+UPDATE rooms
+JOIN bookings
+ON rooms.id = bookings.room_id
+SET rooms.status='available'
+WHERE bookings.check_out < CURDATE()
+AND bookings.status='Lunas'
+");
+
+// Menampilkan semua kamar
 $data = $pdo->query("
 SELECT *
 FROM rooms
-WHERE status='available'
+ORDER BY id DESC
 ");
 
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <meta charset="UTF-8">
@@ -30,51 +42,27 @@ WHERE status='available'
 
 <body>
 
-<!-- NAVBAR -->
-
 <div class="navbar">
 
-    <div class="logo">
-        🏨 HostelKu
-    </div>
-
-    <ul class="nav-menu">
-
-        <li>
-            <a href="dashboard.php">
-                🏠 Home
-            </a>
-        </li>
-
-        <li>
-            <a href="kamar.php">
-                🛏️ Kamar
-            </a>
-        </li>
-
-        <li>
-            <a href="riwayat.php">
-                📋 Riwayat
-            </a>
-        </li>
-
-        <li>
-            <a href="profile.php">
-                👤 Profil
-            </a>
-        </li>
-
-        <li>
-            <a href="../logout.php" class="logout">
-                🚪 Logout
-            </a>
-        </li>
-
-    </ul>
-
+<div class="logo">
+🏨 HostelKu
 </div>
 
-<!-- CONTENT -->
+<ul class="nav-menu">
+
+<li><a href="dashboard.php">🏠 Home</a></li>
+
+<li><a href="kamar.php">🛏️ Kamar</a></li>
+
+<li><a href="riwayat.php">📋 Riwayat</a></li>
+
+<li><a href="profile.php">👤 Profil</a></li>
+
+<li><a href="../logout.php" class="logout">🚪 Logout</a></li>
+
+</ul>
+
+</div>
 
 <div class="container">
 
@@ -104,19 +92,20 @@ alt="<?= $room['room_name']; ?>">
 </p>
 
 <p class="price">
-💰 Harian : Rp <?= number_format($room['daily_price']); ?>
+💰 Harian :
+Rp <?= number_format($room['daily_price']); ?>
 </p>
 
 <p class="price">
-📅 Mingguan : Rp <?= number_format($room['weekly_price']); ?>
+📅 Mingguan :
+Rp <?= number_format($room['weekly_price']); ?>
 </p>
 
-<p>
-✅ Status :
-<?= ucfirst($room['status']); ?>
-</p>
+<?php if($room['status']=="available"){ ?>
 
-<br>
+<p style="color:green;font-weight:bold;">
+🟢 Kamar Kosong
+</p>
 
 <a
 href="booking.php?room_id=<?= $room['id']; ?>"
@@ -125,6 +114,23 @@ class="btn">
 🛏️ Booking Sekarang
 
 </a>
+
+<?php }else{ ?>
+
+<p style="color:red;font-weight:bold;">
+🔴 Kamar Terisi
+</p>
+
+<button
+class="btn"
+style="background:red;"
+disabled>
+
+Kamar Sedang Terisi
+
+</button>
+
+<?php } ?>
 
 </div>
 
