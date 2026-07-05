@@ -74,11 +74,21 @@ ORDER BY id DESC
 
 <?php while($room = $data->fetch()): ?>
 
-<div class="room-card">
+    <div class="room-card">
+
+<a href="booking.php?room_id=<?= $room['id']; ?>">
 
 <img
 src="../assets/upload/<?= $room['photo']; ?>"
-alt="<?= $room['room_name']; ?>">
+alt="<?= $room['room_name']; ?>"
+style="
+width:100%;
+height:160px;
+object-fit:cover;
+display:block;
+">
+
+</a>
 
 <div class="room-body">
 
@@ -106,13 +116,8 @@ Rp <?= number_format($room['weekly_price']); ?>
 <p style="color:green;font-weight:bold;">
 🟢 Kamar Kosong
 </p>
-
-<a
-href="booking.php?room_id=<?= $room['id']; ?>"
-class="btn">
-
-🛏️ Booking Sekarang
-
+<a href="booking.php?room_id=<?= $room['id']; ?>" class="btn">
+    🛏️ Booking Sekarang
 </a>
 
 <?php }else{ ?>

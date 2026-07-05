@@ -18,6 +18,7 @@ CREATE TABLE rooms (
     weekly_price DECIMAL(12,2) NOT NULL,
 
     photo VARCHAR(255),
+    ALTER TABLE rooms
 
     description TEXT,
 

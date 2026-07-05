@@ -73,14 +73,22 @@ Rp <?= number_format($room['weekly_price']); ?>
 
 <td>
 
+<td>
+
 <a href="edit_kamar.php?id=<?= $room['id']; ?>" class="btn-warning">
 Edit
+</a>
+
+<a href="foto_kamar.php?id=<?= $room['id']; ?>" class="btn">
+Foto
 </a>
 
 <a href="hapus_kamar.php?id=<?= $room['id']; ?>" class="btn-danger"
 onclick="return confirm('Hapus data?')">
 Hapus
 </a>
+
+</td>
 
 </td>
 

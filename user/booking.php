@@ -8,12 +8,37 @@ if(!isset($_SESSION['user_id'])){
     exit;
 }
 
-$id = $_GET['room_id'];
+$id = isset($_GET['room_id']) ? $_GET['room_id'] : 0;
 
+// Ambil data kamar
 $stmt = $pdo->prepare("SELECT * FROM rooms WHERE id=?");
 $stmt->execute([$id]);
-
 $room = $stmt->fetch();
+
+if(!$room){
+    die("Kamar tidak ditemukan.");
+}
+
+// Ambil foto tambahan
+$allPhotos = [];
+
+try{
+
+    $photos = $pdo->prepare("
+    SELECT photo
+    FROM room_photos
+    WHERE room_id=?
+    ");
+
+    $photos->execute([$id]);
+
+    $allPhotos = $photos->fetchAll(PDO::FETCH_ASSOC);
+
+}catch(Exception $e){
+
+    $allPhotos = [];
+
+}
 
 if(isset($_POST['booking'])){
 
@@ -21,13 +46,9 @@ if(isset($_POST['booking'])){
     $duration  = $_POST['duration'];
 
     if($rent_type=="harian"){
-
         $total = $room['daily_price'] * $duration;
-
     }else{
-
         $total = $room['weekly_price'] * $duration;
-
     }
 
     $pdo->prepare("
@@ -71,7 +92,47 @@ if(isset($_POST['booking'])){
 
 <title>Booking Kamar</title>
 
-<link rel="stylesheet" href="../assets/user.css">
+<link rel="stylesheet" href="../assets/user.css?v=<?= time(); ?>">
+
+<style>
+
+.gallery{
+    width:100%;
+    text-align:center;
+    margin:20px 0;
+}
+
+#mainImage{
+    width:450px;
+    height:280px;
+    object-fit:cover;
+    border-radius:12px;
+    border:1px solid #ddd;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
+}
+
+.thumbs{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.thumbs img{
+    width:90px;
+    height:70px;
+    object-fit:cover;
+    border-radius:8px;
+    cursor:pointer;
+    border:2px solid #ddd;
+}
+
+.thumbs img:hover{
+    border-color:#2563eb;
+}
+
+</style>
 
 </head>
 
@@ -93,7 +154,7 @@ if(isset($_POST['booking'])){
 
 <li><a href="profile.php">👤 Profil</a></li>
 
-<li><a href="../logout.php" class="logout">🚪 Logout</a></li>
+<li><a href="../logout.php">🚪 Logout</a></li>
 
 </ul>
 
@@ -103,16 +164,40 @@ if(isset($_POST['booking'])){
 
 <div class="profile-card">
 
-<h2>Booking Kamar</h2>
+<h2 style="text-align:center;">Booking Kamar</h2>
 
-<br>
+<h3 style="text-align:center;">
+<?= $room['room_name']; ?>
+</h3>
 
-<h3><?= $room['room_name']; ?></h3>
+<div class="gallery">
 
-<br>
+<img
+id="mainImage"
+src="../assets/upload/<?= $room['photo']; ?>"
+>
+
+<div class="thumbs">
+
+<img
+src="../assets/upload/<?= $room['photo']; ?>"
+onclick="changeImage(this)"
+>
+
+<?php foreach($allPhotos as $foto){ ?>
+
+<img
+src="../assets/upload/<?= $foto['photo']; ?>"
+onclick="changeImage(this)"
+>
+
+<?php } ?>
+
+</div>
+
+</div>
 
 <form method="POST">
-
 <label>Jenis Sewa</label>
 
 <select
@@ -120,13 +205,8 @@ name="rent_type"
 class="form-control"
 required>
 
-<option value="harian">
-Harian
-</option>
-
-<option value="mingguan">
-Mingguan
-</option>
+<option value="harian">Harian</option>
+<option value="mingguan">Mingguan</option>
 
 </select>
 
@@ -155,6 +235,8 @@ name="check_out"
 class="form-control"
 required>
 
+<br>
+
 <button
 type="submit"
 name="booking"
@@ -170,5 +252,16 @@ Konfirmasi Booking
 
 </div>
 
+<script>
+
+function changeImage(img){
+
+    document.getElementById("mainImage").src = img.src;
+
+}
+
+</script>
+
 </body>
+
 </html>
