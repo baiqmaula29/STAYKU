@@ -201,8 +201,10 @@ onclick="changeImage(this)"
 <label>Jenis Sewa</label>
 
 <select
+id="rent_type"
 name="rent_type"
 class="form-control"
+onchange="hitungTotal()">
 required>
 
 <option value="harian">Harian</option>
@@ -214,9 +216,12 @@ required>
 
 <input
 type="number"
+id="duration"
 name="duration"
 class="form-control"
 min="1"
+onkeyup="hitungTotal()"
+onchange="hitungTotal()"
 required>
 
 <label>Check In</label>
@@ -236,6 +241,11 @@ class="form-control"
 required>
 
 <br>
+
+<h3 style="margin:20px 0;color:#2563eb;">
+Total :
+Rp <span id="totalHarga">0</span>
+</h3>
 
 <button
 type="submit"
@@ -257,6 +267,35 @@ Konfirmasi Booking
 function changeImage(img){
 
     document.getElementById("mainImage").src = img.src;
+
+}
+
+</script>
+
+<script>
+
+const hargaHarian = <?= $room['daily_price']; ?>;
+const hargaMingguan = <?= $room['weekly_price']; ?>;
+
+function hitungTotal(){
+
+    let jenis = document.getElementById("rent_type").value;
+    let lama = document.getElementById("duration").value;
+
+    if(lama==""){
+        lama=0;
+    }
+
+    let total=0;
+
+    if(jenis=="harian"){
+        total=hargaHarian*lama;
+    }else{
+        total=hargaMingguan*lama;
+    }
+
+    document.getElementById("totalHarga").innerHTML=
+        total.toLocaleString('id-ID');
 
 }
 

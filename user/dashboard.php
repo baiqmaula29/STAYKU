@@ -55,64 +55,84 @@ if(!isset($_SESSION['user_id'])){
 </div>
 <!-- HERO -->
 
-<div class="hero">
+<section class="hero">
 
-    <h1>
-        Selamat Datang,
-        <?= $_SESSION['name']; ?> 👋
-    </h1>
+<h1>
+🏨 HostelKu
+</h1>
 
-    <p>
-        Temukan kamar hostel terbaik dengan harga terjangkau.
-    </p>
+<p>
+Temukan kamar hostel nyaman dengan harga terbaik.
+Booking lebih cepat, mudah dan aman.
+</p>
 
-    <br>
+<a href="kamar.php" class="btn">
+Cari Kamar
+</a>
 
-    <a href="kamar.php" class="btn">
-        Booking Sekarang
-    </a>
-
-</div>
+</section>
 
 <!-- FITUR -->
 
-<div class="container">
+<div class="feature">
 
-    <div class="feature">
+<div class="feature-box">
+<h2>🛏️</h2>
+<h3>Kamar Nyaman</h3>
+<p>Bersih, rapi dan lengkap.</p>
+</div>
 
-        <div class="feature-box">
+<div class="feature-box">
+<h2>💰</h2>
+<h3>Harga Murah</h3>
+<p>Harian dan mingguan.</p>
+</div>
 
-            <h3>🏨 Kamar Nyaman</h3>
+<div class="feature-box">
+<h2>📍</h2>
+<h3>Lokasi Strategis</h3>
+<p>Dekat kampus dan pusat kota.</p>
+</div>
 
-            <p>
-                Kamar bersih dan nyaman untuk istirahat.
-            </p>
-
-        </div>
-
-        <div class="feature-box">
-
-            <h3>💰 Harga Terjangkau</h3>
-
-            <p>
-                Harga sesuai kantong mahasiswa dan traveler.
-            </p>
-
-        </div>
-
-        <div class="feature-box">
-
-            <h3>🔒 Aman</h3>
-
-            <p>
-                Data booking tersimpan dengan aman.
-            </p>
+</div>
 
         </div>
 
     </div>
 
 </div>
+
+<footer class="footer">
+
+<div class="footer-content">
+
+<h2>🏨 HostelKu</h2>
+
+<p>
+Hostel nyaman dengan harga terbaik untuk mahasiswa dan wisatawan.
+</p>
+
+<hr>
+
+<p>
+
+© 2025 HostelKu
+
+|
+
+Email :
+hostelku@gmail.com
+
+|
+
+Telp :
+0812-3456-7890
+
+</p>
+
+</div>
+
+</footer>
 
 </body>
 </html>

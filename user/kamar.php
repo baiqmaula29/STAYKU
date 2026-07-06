@@ -18,13 +18,22 @@ WHERE bookings.check_out < CURDATE()
 AND bookings.status='Lunas'
 ");
 
-// Menampilkan semua kamar
-$data = $pdo->query("
+$cari = isset($_GET['cari']) ? $_GET['cari'] : '';
+
+$stmt = $pdo->prepare("
 SELECT *
 FROM rooms
+WHERE room_name LIKE ?
+OR room_number LIKE ?
 ORDER BY id DESC
 ");
 
+$stmt->execute([
+"%$cari%",
+"%$cari%"
+]);
+
+$data = $stmt;
 ?>
 
 <!DOCTYPE html>
@@ -69,6 +78,25 @@ ORDER BY id DESC
 <h2 class="section-title">
 🛏️ Daftar Kamar
 </h2>
+
+<form method="GET" style="margin-bottom:25px;display:flex;gap:10px;">
+
+<input
+type="text"
+name="cari"
+class="form-control"
+placeholder="🔍 Cari nama atau nomor kamar..."
+value="<?= htmlspecialchars($cari); ?>">
+
+<button class="btn">
+Cari
+</button>
+
+<a href="kamar.php" class="btn" style="background:#6b7280;">
+Reset
+</a>
+
+</form>
 
 <div class="room-grid">
 
