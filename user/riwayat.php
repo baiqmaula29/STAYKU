@@ -48,7 +48,7 @@ $_SESSION['user_id']
 <div class="navbar">
 
     <div class="logo">
-        🏨 HostelKu
+        🏨 StayKu Mandalika
     </div>
 
     <ul class="nav-menu">

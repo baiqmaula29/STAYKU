@@ -14,7 +14,7 @@ $data = $pdo->query("SELECT * FROM rooms ORDER BY id DESC");
 <body>
 
 <div class="sidebar">
-    <h2>HOSTEL</h2>
+    <h2>StayKu Mandalika</h2>
 
     <a href="dashboard.php">Dashboard</a>
     <a href="kamar.php">Data Kamar</a>

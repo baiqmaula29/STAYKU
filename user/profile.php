@@ -29,7 +29,7 @@ href="../assets/user.css">
 <div class="navbar">
 
 <div class="logo">
-HOSTELKU
+StayKu Mandalika
 </div>
 
 </div>

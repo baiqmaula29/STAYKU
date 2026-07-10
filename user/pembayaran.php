@@ -82,7 +82,7 @@ if(isset($_POST['upload'])){
 <div class="navbar">
 
 <div class="logo">
-🏨 HostelKu
+🏨 StayKu Mandalika
 </div>
 
 <ul class="nav-menu">

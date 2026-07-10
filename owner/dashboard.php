@@ -34,7 +34,7 @@ WHERE status='Lunas'
 
 <div class="sidebar">
 
-<h2>HOSTEL</h2>
+<h2>STAYKU</h2>
 
 <a href="dashboard.php">Dashboard</a>
 
@@ -58,7 +58,7 @@ WHERE status='Lunas'
             Selamat Datang, <?= $_SESSION['name']; ?>
         </h2>
 
-        <p>Dashboard Owner Hostel</p>
+        <p>Dashboard Owner HStayku</p>
 
     </div>
 

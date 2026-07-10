@@ -42,7 +42,7 @@ ORDER BY payments.id DESC
 
 <div class="sidebar">
 
-<h2>HOSTEL</h2>
+<h2>StayKu Mandalika</h2>
 
 <a href="dashboard.php">Dashboard</a>
 <a href="kamar.php">Kamar</a>

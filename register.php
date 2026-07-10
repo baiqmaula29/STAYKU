@@ -49,7 +49,7 @@ if(isset($_POST['register'])){
 <html>
 <head>
 
-<title>Register Hostel</title>
+<title>Register StayKu Mandalika/title>
 
 <link rel="stylesheet"
 href="assets/style.css">
