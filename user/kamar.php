@@ -59,15 +59,15 @@ $data = $stmt;
 
 <ul class="nav-menu">
 
-<li><a href="dashboard.php">🏠 Home</a></li>
+<li><a href="dashboard.php"> Home</a></li>
 
-<li><a href="kamar.php">🛏️ Kamar</a></li>
+<li><a href="kamar.php"> Kamar</a></li>
 
-<li><a href="riwayat.php">📋 Riwayat</a></li>
+<li><a href="riwayat.php">Riwayat</a></li>
 
-<li><a href="profile.php">👤 Profil</a></li>
+<li><a href="profile.php"> Profil</a></li>
 
-<li><a href="../logout.php" class="logout">🚪 Logout</a></li>
+<li><a href="../logout.php" class="logout">Logout</a></li>
 
 </ul>
 
@@ -81,20 +81,6 @@ $data = $stmt;
 
 <form method="GET" style="margin-bottom:25px;display:flex;gap:10px;">
 
-<input
-type="text"
-name="cari"
-class="form-control"
-placeholder="🔍 Cari nama atau nomor kamar..."
-value="<?= htmlspecialchars($cari); ?>">
-
-<button class="btn">
-Cari
-</button>
-
-<a href="kamar.php" class="btn" style="background:#6b7280;">
-Reset
-</a>
 
 </form>
 
@@ -125,18 +111,32 @@ display:block;
 </h3>
 
 <p>
-📌 Nomor Kamar :
+
+<?php if($room['room_type']=="AC"){ ?>
+
+❄️ Tipe : <b>AC</b>
+
+<?php }else{ ?>
+
+🌀 Tipe : <b>Non AC</b>
+
+<?php } ?>
+
+</p>
+
+<p>
+ Nomor Kamar :
 <b><?= $room['room_number']; ?></b>
 </p>
 
 <p class="price">
-💰 Harian :
+ Harian :
 Rp <?= number_format($room['daily_price']); ?>
 </p>
 
 <p class="price">
-📅 Mingguan :
-Rp <?= number_format($room['weekly_price']); ?>
+ Bulanan:
+Rp <?= number_format($room['monthly_price']); ?>
 </p>
 
 <?php if($room['status']=="available"){ ?>

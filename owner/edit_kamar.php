@@ -16,14 +16,15 @@ $room = $stmt->fetch();
 if(isset($_POST['update'])){
 
     $stmt = $pdo->prepare("
-    UPDATE rooms
-    SET
-        room_name=?,
-        room_number=?,
-        daily_price=?,
-        weekly_price=?,
-        status=?
-    WHERE id=?
+   UPDATE rooms
+SET
+    room_name=?,
+    room_number=?,
+    daily_price=?,
+    monthly_price=?,
+    room_type=?,
+    status=?
+WHERE id=?
     ");
 
     $stmt->execute([
@@ -31,10 +32,11 @@ if(isset($_POST['update'])){
         $_POST['room_name'],
         $_POST['room_number'],
         $_POST['daily_price'],
-        $_POST['weekly_price'],
+        $_POST['monthly_price'],
+        $_POST['room_type'],
         $_POST['status'],
         $id
-
+    
     ]);
 
     header("Location:kamar.php");
@@ -50,7 +52,7 @@ if(isset($_POST['update'])){
 
 <title>Edit Kamar</title>
 
-<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/owner.css?v=1">
 
 </head>
 
@@ -94,11 +96,29 @@ required>
 
 <input
 type="number"
-name="weekly_price"
-value="<?= $room['weekly_price']; ?>"
+name="monthly_price"
+value="<?= $room['monthly_price']; ?>"
 class="form-control"
-placeholder="Harga Mingguan"
+placeholder="Harga Bulanan"
 required>
+
+<select name="room_type" class="form-control">
+
+<option value="AC"
+<?= $room['room_type']=="AC" ? "selected" : ""; ?>>
+
+AC
+
+</option>
+
+<option value="Non AC"
+<?= $room['room_type']=="Non AC" ? "selected" : ""; ?>>
+
+Non AC
+
+</option>
+
+</select>
 
 <br>
 

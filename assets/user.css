@@ -399,3 +399,207 @@ footer p{
     object-fit:cover;
     border-radius:20px;
 }
+
+.profile-card{
+    max-width:700px;
+    margin:30px auto;
+    background:#fff;
+    padding:35px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.avatar{
+    width:110px;
+    height:110px;
+    margin:auto;
+    border-radius:50%;
+    background:#2563eb;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.profile-card h2{
+    margin-bottom:8px;
+}
+
+.profile-card p{
+    margin:8px 0;
+    color:#555;
+}
+
+.profile-button{
+    margin-top:25px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+
+.statistik{
+    max-width:900px;
+    margin:30px auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.stat-box{
+    background:#fff;
+    padding:25px;
+    text-align:center;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.stat-box h3{
+    font-size:34px;
+    color:#2563eb;
+}
+
+.stat-box p{
+    margin-top:8px;
+    color:#666;
+    font-weight:600;
+}
+
+/* =========================
+   PROFILE USER
+========================= */
+
+.profile-card{
+    width:650px;
+    margin:40px auto;
+    background:white;
+    padding:35px 45px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+
+/* avatar */
+
+.avatar{
+    width:90px;
+    height:90px;
+    margin:0 auto 20px;
+
+    border-radius:50%;
+    background:#2563eb;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:45px;
+    color:white;
+}
+
+
+/* nama */
+
+.profile-card h2{
+    text-align:center;
+    font-size:28px;
+    margin-bottom:5px;
+}
+
+
+.profile-card > p:first-of-type{
+    text-align:center;
+    color:#666;
+    margin-bottom:20px;
+}
+
+
+
+/* garis */
+
+.profile-card hr{
+    border:none;
+    border-top:1px solid #ddd;
+    margin:20px 0;
+}
+
+
+
+/* informasi */
+
+.profile-card p{
+    font-size:16px;
+    margin:12px 0;
+    color:#444;
+}
+
+
+
+/* tombol */
+
+.profile-button{
+
+    display:flex;
+    justify-content:center;
+
+    gap:15px;
+
+    margin-top:25px;
+
+}
+
+
+.btn{
+
+    padding:12px 25px;
+
+    border-radius:12px;
+
+    background:#2563eb;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+.btn:hover{
+    opacity:.85;
+}
+
+
+.btn-danger{
+    background:#ef4444;
+}
+
+.profile-card input{
+
+    width:100%;
+    
+    padding:12px;
+    
+    margin:8px 0 15px;
+    
+    border:1px solid #ddd;
+    
+    border-radius:10px;
+    
+    font-size:16px;
+    
+    }
+    
+    
+    .profile-card form p{
+    
+    font-weight:600;
+    
+    margin-bottom:5px;
+    
+    }

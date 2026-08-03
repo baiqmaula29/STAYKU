@@ -1,6 +1,7 @@
 <?php
 session_start();
 require '../config.php';
+require '../midtrans_config.php';
 
 if(!isset($_SESSION['user_id'])){
     header("Location: ../login.php");
@@ -87,15 +88,15 @@ if(isset($_POST['upload'])){
 
 <ul class="nav-menu">
 
-<li><a href="dashboard.php">🏠 Home</a></li>
+<li><a href="dashboard.php"> Home</a></li>
 
-<li><a href="kamar.php">🛏️ Kamar</a></li>
+<li><a href="kamar.php"> Kamar</a></li>
 
-<li><a href="riwayat.php">📋 Riwayat</a></li>
+<li><a href="riwayat.php"> Riwayat</a></li>
 
-<li><a href="profile.php">👤 Profil</a></li>
+<li><a href="profile.php"> Profil</a></li>
 
-<li><a href="../logout.php" class="logout">🚪 Logout</a></li>
+<li><a href="../logout.php" class="logout"> Logout</a></li>
 
 </ul>
 
@@ -119,7 +120,25 @@ Rp <?= number_format($booking['total_price']); ?>
 
 <hr><br>
 
-<h3>Transfer Ke</h3>
+<h3>Bayar Online (QRIS / VA / E-Wallet / Kartu)</h3>
+
+<p>Pembayaran diproses otomatis, status booking akan langsung terupdate.</p>
+
+<button
+type="button"
+id="btnBayarMidtrans"
+class="btn"
+style="background:#059669;">
+
+💳 Bayar Sekarang via Midtrans
+
+</button>
+
+<div id="midtransMsg" style="color:#dc2626;margin-top:10px;"></div>
+
+<hr><br>
+
+<h3>Atau Transfer Manual Ke</h3>
 
 <p><b>Bank BCA</b></p>
 
@@ -157,6 +176,61 @@ Kirim Pembayaran
 </div>
 
 </div>
+<script
+src="<?= MIDTRANS_IS_PRODUCTION ? 'https://app.midtrans.com/snap/snap.js' : 'https://app.sandbox.midtrans.com/snap/snap.js'; ?>"
+data-client-key="<?= MIDTRANS_CLIENT_KEY; ?>">
+</script>
+
+<script>
+document.getElementById('btnBayarMidtrans').addEventListener('click', function () {
+
+    const btn = this;
+    const msg = document.getElementById('midtransMsg');
+
+    btn.disabled = true;
+    btn.innerText = 'Memproses...';
+    msg.innerText = '';
+
+    fetch('midtrans_create_transaction.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: 'booking_id=<?= (int) $booking_id; ?>'
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        btn.disabled = false;
+        btn.innerText = '💳 Bayar Sekarang via Midtrans';
+
+        if (!data.success) {
+            msg.innerText = data.message || 'Gagal memulai pembayaran.';
+            return;
+        }
+
+        window.snap.pay(data.token, {
+            onSuccess: function () {
+                alert('Pembayaran berhasil!');
+                window.location = 'riwayat.php';
+            },
+            onPending: function () {
+                alert('Pembayaran sedang diproses. Silakan selesaikan pembayaran kamu.');
+                window.location = 'riwayat.php';
+            },
+            onError: function () {
+                msg.innerText = 'Terjadi kesalahan saat pembayaran.';
+            },
+            onClose: function () {
+                msg.innerText = 'Kamu menutup popup sebelum menyelesaikan pembayaran.';
+            }
+        });
+    })
+    .catch(() => {
+        btn.disabled = false;
+        btn.innerText = '💳 Bayar Sekarang via Midtrans';
+        msg.innerText = 'Gagal terhubung ke server.';
+    });
+});
+</script>
 
 </body>
 </html>

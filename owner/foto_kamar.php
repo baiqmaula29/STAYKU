@@ -54,7 +54,7 @@ $data->execute([$id]);
 
 <title>Foto Kamar</title>
 
-<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/owner.css?v=1">
 
 </head>
 

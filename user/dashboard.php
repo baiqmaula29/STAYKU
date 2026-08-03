@@ -31,15 +31,15 @@ if(!isset($_SESSION['user_id'])){
 
     <ul class="nav-menu">
 
-        <li><a href="dashboard.php">🏠 Home</a></li>
+        <li><a href="dashboard.php"> Beranda</a></li>
 
-        <li><a href="kamar.php">🛏️ Kamar</a></li>
+        <li><a href="kamar.php"> Kamar</a></li>
 
-        <li><a href="riwayat.php">📋 Riwayat</a></li>
+        <li><a href="riwayat.php"> Riwayat</a></li>
 
-        <li><a href="profile.php">👤 Profil</a></li>
+        <li><a href="profile.php"> Profil</a></li>
 
-        <li><a href="../logout.php" class="logout">🚪 Logout</a></li>
+        <li><a href="../logout.php" class="logout"> Logout</a></li>
 
     </ul>
 

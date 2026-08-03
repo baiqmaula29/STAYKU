@@ -34,7 +34,7 @@ ORDER BY payments.id DESC
 
 <title>Data Pembayaran</title>
 
-<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/owner.css?v=1">
 
 </head>
 
@@ -42,13 +42,17 @@ ORDER BY payments.id DESC
 
 <div class="sidebar">
 
-<h2>StayKu Mandalika</h2>
+<h2>🏨 STAYKU</h2>
 
-<a href="dashboard.php">Dashboard</a>
-<a href="kamar.php">Kamar</a>
-<a href="boking.php">Booking</a>
-<a href="pembayaran.php">Pembayaran</a>
-<a href="../logout.php">Logout</a>
+<a href="dashboard.php"> Dashboard</a>
+
+<a href="kamar.php"> Data Kamar</a>
+
+<a href="booking.php"> Booking</a>
+
+<a href="pembayaran.php"> Pembayaran</a>
+
+<a href="../logout.php"> Logout</a>
 
 </div>
 
@@ -67,6 +71,9 @@ ORDER BY payments.id DESC
 <th>Kamar</th>
 <th>Jumlah</th>
 <th>Bukti Bayar</th>
+<th>Status</th>
+<th>Aksi</th><th>Bukti Bayar</th>
+<th>Metode</th>
 <th>Status</th>
 <th>Aksi</th>
 
@@ -100,6 +107,14 @@ Belum Upload
 
 <?php } ?>
 
+</td>
+
+<td>
+<?php if($row['order_id']){ ?>
+Midtrans<br><small><?= $row['payment_type'] ?: $row['transaction_status']; ?></small>
+<?php }else{ ?>
+Transfer Manual
+<?php } ?>
 </td>
 
 <td>

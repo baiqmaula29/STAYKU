@@ -26,19 +26,23 @@ ORDER BY bookings.id DESC
 <html>
 <head>
 <title>Data Booking</title>
-<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/owner.css?v=1">
 </head>
 <body>
 
 <div class="sidebar">
 
-<h2>StayKu Mandalika</h2>
+<h2>🏨 STAYKU</h2>
 
-<a href="dashboard.php">Dashboard</a>
-<a href="kamar.php">Kamar</a>
-<a href="boking.php">Booking</a>
-<a href="pembayaran.php">Pembayaran</a>
-<a href="../logout.php">Logout</a>
+<a href="dashboard.php"> Dashboard</a>
+
+<a href="kamar.php"> Data Kamar</a>
+
+<a href="booking.php"> Booking</a>
+
+<a href="pembayaran.php"> Pembayaran</a>
+
+<a href="../logout.php"> Logout</a>
 
 </div>
 

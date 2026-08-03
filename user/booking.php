@@ -48,7 +48,7 @@ if(isset($_POST['booking'])){
     if($rent_type=="harian"){
         $total = $room['daily_price'] * $duration;
     }else{
-        $total = $room['weekly_price'] * $duration;
+        $total = $room['monthly_price'] * $duration;
     }
 
     $pdo->prepare("
@@ -146,15 +146,15 @@ if(isset($_POST['booking'])){
 
 <ul class="nav-menu">
 
-<li><a href="dashboard.php">🏠 Home</a></li>
+<li><a href="dashboard.php">Beranda</a></li>
 
-<li><a href="kamar.php">🛏️ Kamar</a></li>
+<li><a href="kamar.php"> Kamar</a></li>
 
-<li><a href="riwayat.php">📋 Riwayat</a></li>
+<li><a href="riwayat.php"> Riwayat</a></li>
 
-<li><a href="profile.php">👤 Profil</a></li>
+<li><a href="profile.php"> Profil</a></li>
 
-<li><a href="../logout.php">🚪 Logout</a></li>
+<li><a href="../logout.php"> Logout</a></li>
 
 </ul>
 
@@ -204,11 +204,11 @@ onclick="changeImage(this)"
 id="rent_type"
 name="rent_type"
 class="form-control"
-onchange="hitungTotal()">
+onchange="hitungTotal()"
 required>
 
 <option value="harian">Harian</option>
-<option value="mingguan">Mingguan</option>
+<option value="Bulanan">Bulanan</option>
 
 </select>
 
@@ -275,7 +275,7 @@ function changeImage(img){
 <script>
 
 const hargaHarian = <?= $room['daily_price']; ?>;
-const hargaMingguan = <?= $room['weekly_price']; ?>;
+const hargaBulanan = <?= $room['monthly_price']; ?>;
 
 function hitungTotal(){
 
@@ -289,10 +289,10 @@ function hitungTotal(){
     let total=0;
 
     if(jenis=="harian"){
-        total=hargaHarian*lama;
-    }else{
-        total=hargaMingguan*lama;
-    }
+    total = hargaHarian * lama;
+}else{
+    total = hargaBulanan * lama;
+}
 
     document.getElementById("totalHarga").innerHTML=
         total.toLocaleString('id-ID');

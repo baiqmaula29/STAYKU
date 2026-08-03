@@ -52,7 +52,7 @@ if(isset($_POST['login'])){
 <html>
 <head>
 
-<title>Login Hostel</title>
+<title>Login STAYKU</title>
 
 <link rel="stylesheet"
 href="assets/style.css">

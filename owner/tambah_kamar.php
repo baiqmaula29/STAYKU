@@ -4,11 +4,11 @@ session_start();
 require '../config.php';
 
 if(isset($_POST['simpan'])){
-
     $nama = $_POST['room_name'];
     $nomor = $_POST['room_number'];
     $harga_harian = $_POST['daily_price'];
-    $harga_mingguan = $_POST['weekly_price'];
+    $harga_bulanan = $_POST['monthly_price'];
+    $tipe = $_POST['room_type'];
     $status = $_POST['status'];
 
     $foto = $_FILES['photo']['name'];
@@ -23,21 +23,23 @@ if(isset($_POST['simpan'])){
     INSERT INTO rooms
     (
         room_name,
-        room_number,
-        daily_price,
-        weekly_price,
-        status,
-        photo
+room_number,
+daily_price,
+monthly_price,
+room_type,
+status,
+photo
     )
-    VALUES
-    (?,?,?,?,?,?)
+  VALUES
+(?,?,?,?,?,?,?)
     ");
 
     $stmt->execute([
         $nama,
         $nomor,
         $harga_harian,
-        $harga_mingguan,
+        $harga_bulanan,
+        $tipe,
         $status,
         $foto
     ]);
@@ -55,7 +57,7 @@ if(isset($_POST['simpan'])){
 
 <title>Tambah Kamar</title>
 
-<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/owner.css?v=1">
 
 </head>
 
@@ -87,6 +89,19 @@ required>
 
 <br>
 
+<select
+name="room_type"
+class="form-control"
+required>
+
+<option value="AC"> AC</option>
+
+<option value="Non AC"> Non AC</option>
+
+</select>
+
+<br>
+
 <input
 type="number"
 name="daily_price"
@@ -98,8 +113,8 @@ required>
 
 <input
 type="number"
-name="weekly_price"
-placeholder="Harga Mingguan"
+name="monthly_price"
+placeholder="Harga Bulanan"
 class="form-control"
 required>
 
@@ -109,13 +124,9 @@ required>
 name="status"
 class="form-control">
 
-<option value="available">
-Tersedia
-</option>
+<option value="available">Tersedia</option>
 
-<option value="occupied">
-Terisi
-</option>
+<option value="occupied">Terisi</option>
 
 </select>
 
